@@ -1,6 +1,0 @@
-<section class="flex flex-col md:grid md:grid-cols-2 gap-4 min-h-full"
-         xmlns="http://www.w3.org/1999/html">
-  @for (deal of (dealsList$ | async); track deal.id) {
-    <ts-deal-card [deal]="deal"></ts-deal-card>
-  }
-</section>

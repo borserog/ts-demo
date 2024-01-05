@@ -13,7 +13,7 @@ import { RealStateDeal } from '../../shared/models/real-state-deal';
 import { DealCardComponent } from '../deal-card/deal-card.component';
 
 @Component({
-  selector: 'ts-deals-list',
+  selector: 'ts-deals-table',
   standalone: true,
   imports: [
     AsyncPipe,
@@ -23,10 +23,9 @@ import { DealCardComponent } from '../deal-card/deal-card.component';
     PercentPipe,
     DealCardComponent,
   ],
-  templateUrl: './deals-list.component.html',
-  styleUrl: './deals-list.component.css',
+  templateUrl: './deals-table.component.html',
 })
-export class DealsListComponent implements OnInit {
+export class DealsTableComponent implements OnInit {
   realStateDealsService = inject(RealStateDealService);
 
   loadDeals$ = new Subject<void>();

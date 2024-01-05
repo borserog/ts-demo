@@ -1,16 +1,16 @@
 import { Route } from '@angular/router';
-import { DealsListComponent } from './components/deals-list/deals-list.component';
 import { DealDetailComponent } from './components/deal-detail/deal-detail.component';
+import { DealsTableComponent } from './components/deals-table/deals-table.component';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo: 'list',
+    redirectTo: 'listing',
     pathMatch: 'full',
   },
   {
-    path: 'list',
-    component: DealsListComponent,
+    path: 'listing',
+    component: DealsTableComponent,
   },
   {
     path: 'deal/:id',
