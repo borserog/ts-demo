@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RealStateDealService } from '../../services/real-state-deal.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
+import { RealStateDealService } from '../../shared/services/real-state-deal.service';
 
 @Component({
   selector: 'ts-deals-list',
