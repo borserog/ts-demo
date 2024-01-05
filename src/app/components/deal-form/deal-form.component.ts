@@ -10,4 +10,6 @@ import { MainComponent } from '../main/main.component';
 })
 export class DealFormComponent {
   protected readonly MainComponent = MainComponent;
+
+  // Use a form array
 }
