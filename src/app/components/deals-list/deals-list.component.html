@@ -1,44 +1,6 @@
-<section class="[&>.card:not(:last-child)]:mb-4">
+<section class="flex flex-col md:grid md:grid-cols-2 gap-4 min-h-full"
+         xmlns="http://www.w3.org/1999/html">
   @for (deal of (dealsList$ | async); track deal.id) {
-    <div class="w-full card bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title flex flex-row flex-nowrap justify-between ">
-          <p class="truncate">{{ deal.name }}</p>
-          <ng-container
-            *ngTemplateOutlet="typeBadge; context:{ type: deal.type} ">
-          </ng-container>
-        </h2>
-        <div class="divider m-0"></div>
-
-        <div class="label">
-          <label for="address">
-            <p class="font-bold">Address</p>
-            <p id="address">{{ deal.address }}</p>
-          </label>
-        </div>
-
-
-      </div>
-    </div>
+    <ts-deal-card [deal]="deal"></ts-deal-card>
   }
 </section>
-
-
-<ng-template #typeBadge let-dealType="type">
-  @switch (dealType) {
-    @case ('Acquisition') {
-      <div class="badge badge-success">{{ dealType }}</div>
-    }
-    @case ('Lease') {
-      <div class="badge badge-info">{{ dealType }}</div>
-    }
-    @case ('Development') {
-      <div class="badge badge-warning">{{ dealType }}</div>
-    }
-    @default {
-      <div class="badge badge-ghost">{{ dealType }}</div>
-    }
-  }
-</ng-template>
-
-<button (click)="loadDeals$.next()">Load Deals</button>
