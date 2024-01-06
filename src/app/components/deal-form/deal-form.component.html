@@ -1,10 +1,88 @@
-<dialog [id]="MainComponent.dealFormDialogId" class="modal">
-  <div class="modal-box">
+<dialog #dialog [id]="MainComponent.dealFormDialogId" class="modal">
+  <div class="modal-box max-w-[800px]">
     <h3 class="font-bold text-lg">Add New Deals</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
-    <form method="dialog">
-      <!-- if there is a button in form, it will close the modal -->
-      <button class="btn">Close</button>
+    <form [formGroup]="form" class="p-6 max-h-[40vh] overflow-auto flex flex-col gap-2">
+      <ng-container formArrayName="dealsForm">
+        @for (dealForm of dealsForm.controls; track dealForm; let i = $index) {
+          <div class="shadow-sm border-[1px] rounded border-slate-300 bg-slate-100 p-4"
+               [formGroup]="castFormGroup(dealForm)">
+
+            <div class="grid grid-cols-2 gap-4 text-sm">
+              <label class="form-control w-full">
+                <p class="font-bold mb-1">Deal Name</p>
+                <input
+                  formControlName="name"
+                  autocomplete="off"
+                  class="input input-bordered input-xs w-full"
+                  maxlength="30"
+                  minlength="1"
+                  name="name"
+                  placeholder="Type here"
+                  type="text" />
+              </label>
+
+              <label class="form-control w-full">
+                <p class="font-bold mb-1">Address</p>
+                <input
+                  formControlName="address"
+                  autocomplete="off"
+                  class="input input-bordered input-xs w-full"
+                  maxlength="30"
+                  minlength="1"
+                  name="address"
+                  placeholder="Type here"
+                  type="text" />
+              </label>
+
+              <label class="form-control w-full">
+                <p class="font-bold mb-1">Purchase Price</p>
+                <input
+                  formControlName="price"
+                  autocomplete="off"
+                  class="input input-bordered input-xs w-full"
+                  maxlength="30"
+                  minlength="1"
+                  name="purchase-price"
+                  placeholder="Type here"
+                  type="number" />
+              </label>
+
+              <label class="form-control w-full">
+                <p class="font-bold mb-1">NOI</p>
+                <input
+                  formControlName="noi"
+                  autocomplete="off"
+                  class="input input-bordered input-xs w-full"
+                  maxlength="30"
+                  minlength="1"
+                  name="noi"
+                  placeholder="Type here"
+                  type="number" />
+              </label>
+            </div>
+          </div>
+        }
+
+      </ng-container>
+
+
     </form>
+    <small>{{ dealsForm.length }}/5</small>
+    <!-- if there is a button in form, it will close the modal -->
+    <!--      if it is an adding operation -->
+    <div class="flex place-content-center m-8">
+      <button (click)="addNewDealForm()" [disabled]="dealsForm.length >= 5" class="btn btn-outline btn-circle btn-sm">+
+      </button>
+    </div>
+
+    <div>
+      <button (click)="document?.defaultView?.alert(JSON.stringify(this.form.controls.dealsForm.value) || '')"
+              [disabled]="form.invalid"
+              class="btn btn-primary"
+      >
+        Send
+      </button>
+      <button (click)="closeDialog(dialog)" class="btn">Close</button>
+    </div>
   </div>
 </dialog>
