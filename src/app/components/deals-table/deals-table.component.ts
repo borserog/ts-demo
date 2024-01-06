@@ -10,7 +10,7 @@ import {
 } from '@angular/common';
 import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
 import { DealCardComponent } from '../deal-card/deal-card.component';
-import { Dialog } from '@angular/cdk/dialog';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { DealFormDialog } from '../deal-dialog/deal-form-dialog.component';
 
 @Component({
@@ -23,6 +23,7 @@ import { DealFormDialog } from '../deal-dialog/deal-form-dialog.component';
     CurrencyPipe,
     PercentPipe,
     DealCardComponent,
+    DialogModule,
   ],
   templateUrl: './deals-table.component.html',
 })
@@ -42,9 +43,10 @@ export class DealsTableComponent implements OnInit {
     this.loadDeals$.next();
   }
 
-  openDialog(): void {
+  openDialog(data?: RealStateDeal): void {
     const dialogRef = this.dialog.open(DealFormDialog, {
       minWidth: '80vw',
+      data,
     });
 
     dialogRef.closed.subscribe(() => this.loadDeals$.next());

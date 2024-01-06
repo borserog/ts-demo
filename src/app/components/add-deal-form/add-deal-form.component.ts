@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
-import { NgClass, NgPlural, NgPluralCase } from '@angular/common';
+import { JsonPipe, NgClass, NgPlural, NgPluralCase } from '@angular/common';
 import {
   FormArray,
   FormBuilder,
@@ -8,7 +8,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { DealForm } from '../deal-dialog/deal-form-dialog.component';
+import {
+  DealForm,
+  DealFormDialog,
+} from '../deal-dialog/deal-form-dialog.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 @Component({
@@ -20,6 +23,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     CdkAccordionModule,
     NgClass,
     NgPluralCase,
+    JsonPipe,
   ],
   templateUrl: './add-deal-form.component.html',
 })
@@ -39,6 +43,7 @@ export class AddDealFormComponent {
   });
   protected readonly dealTypes = dealTypes;
   protected readonly Object = Object;
+  protected readonly DealFormDialog = DealFormDialog;
 
   get dealsForm() {
     return this.form.controls['dealsForm'] as FormArray<any>;

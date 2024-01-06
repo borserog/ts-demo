@@ -1,27 +1,36 @@
-<h3 [ngPlural]="dealsForm.controls.length" class="font-bold text-lg mb-4">
+<h2 [ngPlural]="dealsForm.controls.length" class="font-bold text-xl mb-4">
   <ng-template ngPluralCase="=1"> Add New Deal</ng-template>
   <ng-template ngPluralCase="other"> Add {{ dealsForm.controls.length }} New Deals</ng-template>
-</h3>
+</h2>
 <form [formGroup]="form" class="max-h-[40vh] overflow-auto flex flex-col gap-2 mb-2">
   <cdk-accordion #accordion="cdkAccordion" formArrayName="dealsForm" multi="true">
-    @for (dealForm of dealsForm.controls; track dealForm; let index = $index) {
+    @for (dealForm of dealsForm.controls; track dealForm; let index = $index; let first = $first; let last = $last; let count = $count) {
       <cdk-accordion-item role="button"
                           expanded="true"
-                          class="p-0"
+                          class="p-0 rounded"
                           #accordionItem="cdkAccordionItem"
                           [attr.id]="'accordion-header-' + index"
                           [attr.aria-expanded]="accordionItem.expanded"
                           [attr.aria-controls]="'accordion-body-' + index"
                           [formGroup]="castFormGroup(dealForm)">
-        <div class="shadow-sm border-[1px] rounded border-slate-300"
+        <div class="shadow-sm border-slate-300"
         >
-
-          <div class="p-4"
-               [ngClass]="{'bg-error text-red-100': dealForm.invalid, 'bg-success text-green-100': dealForm.valid}"
+          <div class="p-4 border-b-[1px]"
+               [ngClass]="{
+                'bg-error text-red-100': dealForm.invalid,
+                'bg-success text-green-100': dealForm.valid,
+                'rounded-t-2xl': first,
+                'rounded-b-2xl': last && !accordionItem.expanded,
+                'border-b-[1px]': !last
+               }"
                (click)="accordionItem.toggle()">
-            {{ dealForm.invalid ? 'Invalid' : 'Good to go' }}
+            <span class="font-bold">{{ index + 1 }} of {{ count }}
+              :</span> {{ dealForm.invalid ? 'Fill all fields' : 'Good to go' }}
           </div>
           <div role="region" class="grid grid-cols-2 gap-4 bg-slate-100 text-sm p-4"
+               [ngClass]="{
+                'rounded-b-2xl': last && accordionItem.expanded,
+               }"
                [style.display]="accordionItem.expanded ? '' : 'none'"
                [attr.id]="'accordion-body-' + index"
                [attr.aria-labelledby]="'accordion-header-' + index">
@@ -31,7 +40,7 @@
                 formControlName="name"
                 autocomplete="off"
                 class="input input-bordered input-xs w-full"
-                maxlength="30"
+                [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
                 minlength="1"
                 name="name"
                 placeholder="Type here"
@@ -44,7 +53,7 @@
                 formControlName="address"
                 autocomplete="off"
                 class="input input-bordered input-xs w-full"
-                maxlength="30"
+                [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
                 minlength="1"
                 name="address"
                 placeholder="Type here"
@@ -57,7 +66,7 @@
                 formControlName="purchasePrice"
                 autocomplete="off"
                 class="input input-bordered input-xs w-full"
-                maxlength="30"
+                [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
                 minlength="1"
                 name="purchase-price"
                 placeholder="Type here"
@@ -70,7 +79,7 @@
                 formControlName="netOperationalIncome"
                 autocomplete="off"
                 class="input input-bordered input-xs w-full"
-                maxlength="30"
+                [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
                 minlength="1"
                 name="noi"
                 placeholder="Type here"

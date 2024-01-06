@@ -1,0 +1,76 @@
+<h2 class="font-bold text-xl mb-4">
+  Edit Deal
+</h2>
+<form [formGroup]="form" class="max-h-[40vh] overflow-auto flex flex-col md:grid md:grid-cols-2 gap-4 mb-2 p-2">
+  <label class="form-control w-full">
+    <p class="font-bold mb-1">Deal Name</p>
+    <input
+      [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
+      autocomplete="off"
+      class="input input-bordered w-full"
+      formControlName="name"
+      minlength="1"
+      name="name"
+      placeholder="Type here"
+      type="text" />
+  </label>
+
+  <label class="form-control w-full">
+    <p class="font-bold mb-1">Address</p>
+    <input
+      [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
+      autocomplete="off"
+      class="input input-bordered w-full"
+      formControlName="address"
+      minlength="1"
+      name="address"
+      placeholder="Type here"
+      type="text" />
+  </label>
+
+  <label class="form-control w-full">
+    <p class="font-bold mb-1">Purchase Price</p>
+    <input
+      [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
+      autocomplete="off"
+      class="input input-bordered w-full"
+      formControlName="purchasePrice"
+      minlength="1"
+      name="purchase-price"
+      placeholder="Type here"
+      type="number" />
+  </label>
+
+  <label class="form-control w-full">
+    <p class="font-bold mb-1">NOI</p>
+    <input
+      [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
+      autocomplete="off"
+      class="input input-bordered w-full"
+      formControlName="netOperationalIncome"
+      minlength="1"
+      name="noi"
+      placeholder="Type here"
+      type="number" />
+  </label>
+
+  <label class="form-control w-full">
+    <p class="font-bold mb-1">Type</p>
+    <select class="select select-bordered w-full max-w-xs" formControlName="type">
+      <option [value]="''" disabled selected>Select Deal type</option>
+      @for (entry of Object.values(dealTypes); track entry) {
+        <option [value]="entry">{{ entry }}</option>
+      }
+    </select>
+  </label>
+</form>
+
+<div class="flex flex-row place-content-end gap-2">
+  <button (click)="editDeal()"
+          [disabled]="form.invalid || form.pristine"
+          class="btn btn-primary"
+  >
+    Send
+  </button>
+  <button (click)="closeDialog()" class="btn btn-ghost">Close</button>
+</div>

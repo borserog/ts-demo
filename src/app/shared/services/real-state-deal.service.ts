@@ -15,6 +15,20 @@ export class RealStateDealService {
   addNewDeals(deals: RealStateDeal[]) {
     mockedDeals = [...deals, ...mockedDeals];
   }
+
+  editDeal(editedDeal: RealStateDeal) {
+    const recoveredDeal = mockedDeals.find(
+      (deal) => deal?.id === editedDeal.id
+    );
+
+    if (recoveredDeal) {
+      const newMockedDealsState = mockedDeals.filter(
+        (deal) => editedDeal.id !== deal?.id
+      );
+      debugger;
+      mockedDeals = [...newMockedDealsState, editedDeal];
+    }
+  }
 }
 
 let mockedDeals: RealStateDeal[] = [

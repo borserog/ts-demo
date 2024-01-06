@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         @for (deal of dealsList$ | async; track deal.id) {
-          <tr class="hover:bg-slate-200 cursor-pointer">
+          <tr class="hover:bg-slate-200 cursor-pointer" (click)="openDialog(deal)">
             <th [id]="deal.id">{{ deal.id }}</th>
             <td class="truncate">{{ deal.name }}</td>
             <td class="[&>small]:text-xs">
