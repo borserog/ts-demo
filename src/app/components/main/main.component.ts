@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
-import { DealFormComponent } from '../deal-form/deal-form.component';
-import { AsyncPipe, DOCUMENT } from '@angular/common';
+import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { DealFormDialog } from '../deal-dialog/deal-form-dialog.component';
 
 @Component({
   selector: 'ts-main',
   standalone: true,
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
-  imports: [DealFormComponent, AsyncPipe],
+  imports: [DealFormDialog, AsyncPipe],
 })
 export class MainComponent {}

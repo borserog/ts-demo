@@ -10,8 +10,8 @@ import {
 } from '@angular/common';
 import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
 import { DealCardComponent } from '../deal-card/deal-card.component';
-import { DealFormComponent } from '../deal-form/deal-form.component';
 import { Dialog } from '@angular/cdk/dialog';
+import { DealFormDialog } from '../deal-dialog/deal-form-dialog.component';
 
 @Component({
   selector: 'ts-deals-table',
@@ -43,8 +43,8 @@ export class DealsTableComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DealFormComponent, {
-      width: '800px',
+    const dialogRef = this.dialog.open(DealFormDialog, {
+      minWidth: '80vw',
     });
 
     dialogRef.closed.subscribe(() => this.loadDeals$.next());

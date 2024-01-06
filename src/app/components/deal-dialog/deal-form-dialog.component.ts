@@ -7,24 +7,32 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgClass, NgPlural, NgPluralCase } from '@angular/common';
 import { DialogRef } from '@angular/cdk/dialog';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { RealStateDealService } from '../../shared/services/real-state-deal.service';
 import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 export type DealForm = {
   [index in keyof Partial<RealStateDeal>]: any[];
 };
 
 @Component({
-  selector: 'ts-deal-form',
+  selector: 'ts-deal-dialog',
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe, CdkOverlayOrigin],
-  templateUrl: './deal-form.component.html',
-  styleUrl: './deal-form.component.css',
+  imports: [
+    ReactiveFormsModule,
+    JsonPipe,
+    CdkOverlayOrigin,
+    CdkAccordionModule,
+    NgClass,
+    NgPlural,
+    NgPluralCase,
+  ],
+  templateUrl: './deal-form-dialog.component.html',
 })
-export class DealFormComponent implements OnInit {
+export class DealFormDialog implements OnInit {
   dialogRef = inject(DialogRef);
   realStateDealService = inject(RealStateDealService);
 
