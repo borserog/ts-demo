@@ -8,33 +8,45 @@ import {
   Validators,
 } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
+import { DialogRef } from '@angular/cdk/dialog';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { RealStateDealService } from '../../shared/services/real-state-deal.service';
+import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
+
+export type DealForm = {
+  [index in keyof Partial<RealStateDeal>]: any[];
+};
 
 @Component({
   selector: 'ts-deal-form',
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [ReactiveFormsModule, JsonPipe, CdkOverlayOrigin],
   templateUrl: './deal-form.component.html',
   styleUrl: './deal-form.component.css',
 })
 export class DealFormComponent implements OnInit {
+  dialogRef = inject(DialogRef);
+  realStateDealService = inject(RealStateDealService);
+
   @Output() dialogClosed = new EventEmitter();
 
   fb = inject(FormBuilder);
 
-  dealForm = this.fb.group({
+  dealForm: DealForm = {
     name: ['', Validators.required],
     address: ['', Validators.required],
-    price: ['', Validators.required],
-    noi: ['', Validators.required],
-  });
+    purchasePrice: ['', Validators.required],
+    netOperationalIncome: ['', Validators.required],
+    type: ['', Validators.required],
+  };
 
   form = this.fb.group({
-    dealsForm: this.fb.array([this.dealForm]),
+    dealsForm: this.fb.array([this.fb.group({ ...this.dealForm })]),
   });
 
   protected readonly MainComponent = MainComponent;
-  protected readonly document = document;
-  protected readonly JSON = JSON;
+  protected readonly dealTypes = dealTypes;
+  protected readonly Object = Object;
 
   get dealsForm() {
     return this.form.controls['dealsForm'] as FormArray<any>;
@@ -47,17 +59,21 @@ export class DealFormComponent implements OnInit {
   }
 
   addNewDealForm() {
-    this.dealsForm.push(this.dealForm);
+    this.dealsForm.push(this.fb.group({ ...this.dealForm }));
   }
 
   castFormGroup(dealForm: any): FormGroup {
     return dealForm as FormGroup;
   }
 
-  closeDialog(dialog: HTMLDialogElement) {
-    dialog.close();
-    this.form = this.fb.group({
-      dealsForm: this.fb.array([this.dealForm]),
-    });
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+  saveChanges() {
+    this.realStateDealService.addNewDeals(
+      this.form.controls.dealsForm.value as any
+    );
+    this.dialogRef.close();
   }
 }

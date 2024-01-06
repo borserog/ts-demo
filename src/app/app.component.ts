@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { MainComponent } from './components/main/main.component';
+import { DialogModule } from '@angular/cdk/dialog';
 
 @Component({
   standalone: true,

@@ -1,14 +1,19 @@
 <section class="card shadow-2xl p-6 border-[1px] border-slate-300 w-full"
          xmlns="http://www.w3.org/1999/html">
+  <div>
+    <div class="flex place-content-end mb-4">
+      <button (click)="openDialog()" class="btn btn-primary btn-sm">Add Deal</button>
+    </div>
+  </div>
   <div class="overflow-x-auto">
-    <table aria-describedby="Deals Listing" class="table table-xs">
+    <table aria-describedby="Deals Listing" class="table table-sm">
       <!-- head -->
       <thead>
       <tr>
         <th></th>
         <th>Deal Name</th>
-        <th>Purchase Price</th>
         <th>Type</th>
+        <th>Purchase Price</th>
         <th>
           NOI
         </th>
@@ -36,19 +41,19 @@
 </section>
 
 
-<ng-template #typeBadge let-dealType="type">
-  @switch (dealType) {
-    @case ('Acquisition') {
-      <small class="badge badge-success">{{ dealType }}</small>
+<ng-template #typeBadge let-type="type">
+  @switch (type) {
+    @case (dealType.acquisition) {
+      <small class="badge badge-success">{{ type }}</small>
     }
-    @case ('Lease') {
-      <small class="badge badge-info">{{ dealType }}</small>
+    @case (dealType.lease) {
+      <small class="badge badge-info">{{ type }}</small>
     }
-    @case ('Development') {
-      <small class="badge badge-warning">{{ dealType }}</small>
+    @case (dealType.development) {
+      <small class="badge badge-warning">{{ type }}</small>
     }
     @default {
-      <small class="badge badge-ghost">{{ dealType }}</small>
+      <small class="badge badge-ghost">{{ type }}</small>
     }
   }
 </ng-template>

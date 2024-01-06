@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { finalize, Observable, startWith, Subject, switchMap, tap } from 'rxjs';
+import { Observable, startWith, Subject, switchMap, tap } from 'rxjs';
 import { RealStateDealService } from '../../shared/services/real-state-deal.service';
 import {
   AsyncPipe,
@@ -9,8 +8,10 @@ import {
   NgTemplateOutlet,
   PercentPipe,
 } from '@angular/common';
-import { RealStateDeal } from '../../shared/models/real-state-deal';
+import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
 import { DealCardComponent } from '../deal-card/deal-card.component';
+import { DealFormComponent } from '../deal-form/deal-form.component';
+import { Dialog } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'ts-deals-table',
@@ -27,6 +28,7 @@ import { DealCardComponent } from '../deal-card/deal-card.component';
 })
 export class DealsTableComponent implements OnInit {
   realStateDealsService = inject(RealStateDealService);
+  dialog = inject(Dialog);
 
   loadDeals$ = new Subject<void>();
   dealsList$: Observable<RealStateDeal[]> = this.loadDeals$.pipe(
@@ -34,8 +36,17 @@ export class DealsTableComponent implements OnInit {
     switchMap(() => this.realStateDealsService.getRealStateDeals()),
     tap(console.log)
   );
+  protected readonly dealType = dealTypes;
 
   ngOnInit() {
     this.loadDeals$.next();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DealFormComponent, {
+      width: '800px',
+    });
+
+    dialogRef.closed.subscribe(() => this.loadDeals$.next());
   }
 }
