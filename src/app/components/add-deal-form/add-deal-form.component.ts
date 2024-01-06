@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import {
   DealForm,
-  DealFormDialog,
+  DealFormDialogComponent,
 } from '../deal-dialog/deal-form-dialog.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
@@ -43,7 +43,7 @@ export class AddDealFormComponent {
   });
   protected readonly dealTypes = dealTypes;
   protected readonly Object = Object;
-  protected readonly DealFormDialog = DealFormDialog;
+  protected readonly DealFormDialog = DealFormDialogComponent;
 
   get dealsForm() {
     return this.form.controls['dealsForm'] as FormArray<any>;

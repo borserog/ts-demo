@@ -17,7 +17,7 @@ export type DealForm = {
   imports: [CdkOverlayOrigin, AddDealFormComponent, EditDealFormComponent],
   templateUrl: './deal-form-dialog.component.html',
 })
-export class DealFormDialog {
+export class DealFormDialogComponent {
   static readonly DEFAULT_FIELD_MAX_LENGTH = 50;
   static readonly DEFAULT_MONEY_FIELD_MAX_LENGTH = 15;
   dialogRef = inject(DialogRef);

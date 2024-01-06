@@ -17,7 +17,7 @@ import {
 import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
 import {
   DealForm,
-  DealFormDialog,
+  DealFormDialogComponent,
 } from '../deal-dialog/deal-form-dialog.component';
 
 @Component({
@@ -34,7 +34,7 @@ export class EditDealFormComponent implements OnInit {
   form!: FormGroup;
   protected readonly Object = Object;
   protected readonly dealTypes = dealTypes;
-  protected readonly DealFormDialog = DealFormDialog;
+  protected readonly DealFormDialog = DealFormDialogComponent;
 
   ngOnInit() {
     this.populateForm();

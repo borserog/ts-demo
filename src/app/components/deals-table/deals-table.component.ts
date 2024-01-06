@@ -11,7 +11,7 @@ import {
 import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
 import { DealCardComponent } from '../deal-card/deal-card.component';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { DealFormDialog } from '../deal-dialog/deal-form-dialog.component';
+import { DealFormDialogComponent } from '../deal-dialog/deal-form-dialog.component';
 
 @Component({
   selector: 'ts-deals-table',
@@ -44,7 +44,7 @@ export class DealsTableComponent implements OnInit {
   }
 
   openDialog(data?: RealStateDeal): void {
-    const dialogRef = this.dialog.open(DealFormDialog, {
+    const dialogRef = this.dialog.open(DealFormDialogComponent, {
       minWidth: '80vw',
       data,
     });

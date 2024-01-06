@@ -6,14 +6,33 @@ import { RealStateDeal } from '../models/real-state-deal';
   providedIn: 'root',
 })
 export class RealStateDealService {
+  private readonly idGenerator = this.mockedIdGenerator();
+
   constructor() {}
+
+  *mockedIdGenerator() {
+    let initialId = 8;
+
+    while (true) {
+      yield initialId++;
+    }
+  }
 
   getRealStateDeals(): Observable<RealStateDeal[]> {
     return of(mockedDeals);
   }
 
   addNewDeals(deals: RealStateDeal[]) {
-    mockedDeals = [...deals, ...mockedDeals];
+    const dealsWithIds: RealStateDeal[] = deals.map((deal) => {
+      const id = (this.idGenerator.next().value as number).toString();
+
+      return {
+        id,
+        ...deal,
+      };
+    });
+
+    mockedDeals = [...dealsWithIds, ...mockedDeals];
   }
 
   editDeal(editedDeal: RealStateDeal) {
