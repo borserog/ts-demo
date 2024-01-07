@@ -92,7 +92,7 @@ let mockedDeals: RealEstateDeal[] = [
     type: 'Development',
     purchasePrice: 3500000,
     address: '456 Park Avenue, Natureville',
-    netOperationalIncome: 200000,
+    netOperationalIncome: 356220,
   },
   {
     id: '2',
@@ -100,7 +100,7 @@ let mockedDeals: RealEstateDeal[] = [
     type: 'Lease',
     purchasePrice: 8000000,
     address: '789 Innovation Blvd, Technocity',
-    netOperationalIncome: 600000,
+    netOperationalIncome: 935660,
   },
   {
     id: '3',
@@ -108,7 +108,7 @@ let mockedDeals: RealEstateDeal[] = [
     type: 'Acquisition',
     purchasePrice: 5000000,
     address: '101 Ocean Drive, Coastal Harbor',
-    netOperationalIncome: 350000,
+    netOperationalIncome: 430000,
   },
   {
     id: '4',
@@ -124,7 +124,7 @@ let mockedDeals: RealEstateDeal[] = [
     type: 'Lease',
     purchasePrice: 6000000,
     address: '567 Sunny Hills Rd, Solarville',
-    netOperationalIncome: 400000,
+    netOperationalIncome: 743599,
   },
   {
     id: '6',
@@ -148,7 +148,7 @@ let mockedDeals: RealEstateDeal[] = [
     type: 'Development',
     purchasePrice: 4200000,
     address: '777 Waterfront Blvd, Lakeshore',
-    netOperationalIncome: 300000,
+    netOperationalIncome: 522000,
   },
   {
     id: '9',
@@ -156,7 +156,7 @@ let mockedDeals: RealEstateDeal[] = [
     type: 'Lease',
     purchasePrice: 9000000,
     address: '555 Business Street, City Center',
-    netOperationalIncome: 700000,
+    netOperationalIncome: 920000,
   },
   {
     id: '10',
@@ -164,7 +164,7 @@ let mockedDeals: RealEstateDeal[] = [
     type: 'Acquisition',
     purchasePrice: 6000000,
     address: '123 Countryside Lane, Ruralville',
-    netOperationalIncome: 450000,
+    netOperationalIncome: 772100,
   },
   {
     id: '11',
