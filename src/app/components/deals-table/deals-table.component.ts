@@ -89,9 +89,9 @@ export class DealsTableComponent implements OnInit {
 
     this.filtersForm.valueChanges
       .pipe(
+        takeUntilDestroyed(this.destroyRef),
         debounceTime(500),
         distinctUntilChanged(),
-        takeUntilDestroyed(this.destroyRef),
         tap(console.log)
       )
       .subscribe((filters) => {
