@@ -40,13 +40,11 @@
               <th [id]="deal.id">{{ deal.id }}</th>
               <td class="truncate">{{ deal.name }}</td>
               <td>
-                <ng-container
-                  *ngTemplateOutlet="typeBadge; context:{ type: deal.type} ">
-                </ng-container>
+                <ts-deal-type-badge [dealType]="deal.type"></ts-deal-type-badge>
               </td>
               <td>{{ deal.purchasePrice | currency }}</td>
               <td>{{ deal.netOperationalIncome | currency }}</td>
-              <td>{{ (deal.netOperationalIncome / deal.purchasePrice) | percent }}</td>
+              <td>{{ (deal.netOperationalIncome / deal.purchasePrice) | percent: '1.2-2' }}</td>
               <td>
                 <button class="btn btn-ghost text-blue-500 btn-sm btn-rounded text-xs"
                         (click)="openDialog($event, deal)">
@@ -71,21 +69,4 @@
 </ts-section-card>
 
 
-<ng-template #typeBadge let-type="type">
-  <div class="[&>small]:text-xs text-bold">
-    @switch (type) {
-      @case (dealTypes.acquisition) {
-        <small class="badge badge-success text-green-900">{{ type }}</small>
-      }
-      @case (dealTypes.lease) {
-        <small class="badge badge-info text-blue-800">{{ type }}</small>
-      }
-      @case (dealTypes.development) {
-        <small class="badge badge-warning text-yellow-900">{{ type }}</small>
-      }
-      @default {
-        <small class="badge badge-ghost">{{ type }}</small>
-      }
-    }
-  </div>
-</ng-template>
+

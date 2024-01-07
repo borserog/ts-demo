@@ -35,6 +35,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { SectionCardComponent } from '../../shared/ui/content-card/section-card.component';
+import { DealTypeBadgeComponent } from '../../shared/ui/deal-type-badge/deal-type-badge.component';
 
 @Component({
   selector: 'ts-deals-table',
@@ -51,6 +52,7 @@ import { SectionCardComponent } from '../../shared/ui/content-card/section-card.
     NgPluralCase,
     NgIcon,
     SectionCardComponent,
+    DealTypeBadgeComponent,
   ],
   providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

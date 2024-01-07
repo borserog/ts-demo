@@ -10,7 +10,10 @@ import {
   iconoirArrowLeft,
   iconoirEdit,
   iconoirFilter,
+  iconoirGraphUp,
+  iconoirHomeSale,
   iconoirMap,
+  iconoirMoneySquare,
   iconoirPin,
 } from '@ng-icons/iconoir';
 
@@ -22,6 +25,14 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding()
     ),
     provideNgIconsConfig({ size: '1.25rem' }),
-    provideIcons({ iconoirFilter, iconoirEdit, iconoirArrowLeft, iconoirMap }),
+    provideIcons({
+      iconoirFilter,
+      iconoirEdit,
+      iconoirArrowLeft,
+      iconoirMap,
+      iconoirHomeSale,
+      iconoirMoneySquare,
+      iconoirGraphUp,
+    }),
   ],
 };
