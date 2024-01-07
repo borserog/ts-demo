@@ -5,11 +5,11 @@ import { DealsTableComponent } from './components/deals-table/deals-table.compon
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo: 'listing',
+    redirectTo: 'list',
     pathMatch: 'full',
   },
   {
-    path: 'listing',
+    path: 'list',
     component: DealsTableComponent,
   },
   {

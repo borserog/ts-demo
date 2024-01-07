@@ -1,59 +1,79 @@
 <section class="card shadow-2xl p-6 border-[1px] border-slate-300 w-full"
          xmlns="http://www.w3.org/1999/html">
   <div>
-    <div class="flex place-content-end mb-4">
+    <div class="flex place-content-between mb-4">
+      <div class="flex flex-row justify-start items-center gap-2">
+        <span>Filters:</span>
+        <input [formControl]="dealNameForm"
+               class="input input-bordered input-primary input-sm w-full max-w-xs"
+               placeholder="Deal Name" type="text" />
+      </div>
       <button (click)="openDialog()" class="btn btn-primary btn-sm">Add Deal</button>
     </div>
   </div>
-  <div class="overflow-x-auto">
-    <table aria-describedby="Deals Listing" class="table table-sm">
-      <!-- head -->
-      <thead>
-      <tr>
-        <th></th>
-        <th>Deal Name</th>
-        <th>Type</th>
-        <th>Purchase Price</th>
-        <th>
-          NOI
-        </th>
-        <th>Cap Rate</th>
-      </tr>
-      </thead>
-      <tbody>
-        @for (deal of dealsList$ | async; track deal.id) {
-          <tr class="hover:bg-slate-200 cursor-pointer" (click)="openDialog(deal)">
-            <th [id]="deal.id">{{ deal.id }}</th>
-            <td class="truncate">{{ deal.name }}</td>
-            <td class="[&>small]:text-xs">
-              <ng-container
-                *ngTemplateOutlet="typeBadge; context:{ type: deal.type} ">
-              </ng-container>
-            </td>
-            <td>{{ deal.purchasePrice | currency }}</td>
-            <td>{{ deal.netOperationalIncome | currency }}</td>
-            <td>{{ (deal.netOperationalIncome / deal.purchasePrice) | percent }}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+  @if (dealsList$ | async; as dealsList) {
+
+    <div class="overflow-x-auto">
+      <table aria-describedby="Deals Listing" class="table table-sm">
+        <!-- head -->
+        <thead>
+        <tr>
+          <th></th>
+          <th>Deal Name</th>
+          <th>Type</th>
+          <th>Purchase Price</th>
+          <th>
+            NOI
+          </th>
+          <th>Cap Rate</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (deal of dealsList; track deal.id; let count = $count) {
+            <tr class="hover:bg-slate-200 cursor-pointer" (click)="openDialog(deal)">
+              <th [id]="deal.id">{{ deal.id }}</th>
+              <td class="truncate">{{ deal.name }}</td>
+              <td>
+                <ng-container
+                  *ngTemplateOutlet="typeBadge; context:{ type: deal.type} ">
+                </ng-container>
+              </td>
+              <td>{{ deal.purchasePrice | currency }}</td>
+              <td>{{ deal.netOperationalIncome | currency }}</td>
+              <td>{{ (deal.netOperationalIncome / deal.purchasePrice) | percent }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <small [ngPlural]="dealsList.length" class="text-center text-slate-400 w-full block mt-4">
+        <ng-template ngPluralCase="=1">Displaying {{ dealsList.length }} match</ng-template>
+        <ng-template ngPluralCase="other">Displaying {{ dealsList.length }} matches</ng-template>
+        <ng-template ngPluralCase="0">No matches. Please try a different search criteria.</ng-template>
+      </small>
+    </div>
+  } @else {
+    <div class="text-center flex flex-col place-content-center">
+      <small>Loading...</small>
+    </div>
+  }
 </section>
 
 
 <ng-template #typeBadge let-type="type">
-  @switch (type) {
-    @case (dealType.acquisition) {
-      <small class="badge badge-success">{{ type }}</small>
+  <div class="[&>small]:text-xs text-bold">
+    @switch (type) {
+      @case (dealType.acquisition) {
+        <small class="badge badge-success">{{ type }}</small>
+      }
+      @case (dealType.lease) {
+        <small class="badge badge-info">{{ type }}</small>
+      }
+      @case (dealType.development) {
+        <small class="badge badge-warning">{{ type }}</small>
+      }
+      @default {
+        <small class="badge badge-ghost">{{ type }}</small>
+      }
     }
-    @case (dealType.lease) {
-      <small class="badge badge-info">{{ type }}</small>
-    }
-    @case (dealType.development) {
-      <small class="badge badge-warning">{{ type }}</small>
-    }
-    @default {
-      <small class="badge badge-ghost">{{ type }}</small>
-    }
-  }
+  </div>
 </ng-template>
