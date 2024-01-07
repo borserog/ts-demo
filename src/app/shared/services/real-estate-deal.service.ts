@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { DealTypes, RealStateDeal } from '../models/real-state-deal';
+import { DealTypes, RealEstateDeal } from '../models/real-estate-deal';
 
 export type DealFilters = Partial<{
   name: string;
@@ -10,7 +10,7 @@ export type DealFilters = Partial<{
 @Injectable({
   providedIn: 'root',
 })
-export class RealStateDealService {
+export class RealEstateDealService {
   private readonly idGenerator = this.mockedIdGenerator();
 
   constructor() {}
@@ -23,7 +23,9 @@ export class RealStateDealService {
     }
   }
 
-  getRealStateDeals(filters: DealFilters | null): Observable<RealStateDeal[]> {
+  getRealEstateDeals(
+    filters: DealFilters | null
+  ): Observable<RealEstateDeal[]> {
     if (filters) {
       let filteredResults = [...mockedDeals];
 
@@ -48,8 +50,8 @@ export class RealStateDealService {
     return of(mockedDeals);
   }
 
-  addNewDeals(deals: RealStateDeal[]) {
-    const dealsWithIds: RealStateDeal[] = deals.map((deal) => {
+  addNewDeals(deals: RealEstateDeal[]) {
+    const dealsWithIds: RealEstateDeal[] = deals.map((deal) => {
       const id = (this.idGenerator.next().value as number).toString();
 
       return {
@@ -62,7 +64,7 @@ export class RealStateDealService {
     mockedDeals.sort((a: any, b: any) => +a.id - +b.id);
   }
 
-  editDeal(editedDeal: RealStateDeal) {
+  editDeal(editedDeal: RealEstateDeal) {
     const recoveredDeal = mockedDeals.find(
       (deal) => deal?.id === editedDeal.id
     );
@@ -76,14 +78,14 @@ export class RealStateDealService {
     }
   }
 
-  getDealById(id: string): Observable<RealStateDeal> {
+  getDealById(id: string): Observable<RealEstateDeal> {
     const deal = mockedDeals.find(({ id: dealId }) => dealId === id);
 
-    return of(deal as RealStateDeal);
+    return of(deal as RealEstateDeal);
   }
 }
 
-let mockedDeals: RealStateDeal[] = [
+let mockedDeals: RealEstateDeal[] = [
   {
     id: '1',
     name: 'Green Oasis With Really Big Title',

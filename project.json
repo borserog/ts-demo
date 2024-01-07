@@ -1,5 +1,5 @@
 {
-  "name": "termsheet-demo",
+  "name": "ts-demo",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "ts",
@@ -12,7 +12,7 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/termsheet-demo",
+        "outputPath": "dist/ts-demo",
         "index": "./src/index.html",
         "browser": "./src/main.ts",
         "polyfills": [
@@ -57,10 +57,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "termsheet-demo:build:production"
+          "buildTarget": "ts-demo:build:production"
         },
         "development": {
-          "buildTarget": "termsheet-demo:build:development"
+          "buildTarget": "ts-demo:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -68,7 +68,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "termsheet-demo:build"
+        "buildTarget": "ts-demo:build"
       }
     },
     "lint": {

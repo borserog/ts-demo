@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DealTypes, dealTypes } from '../../models/real-state-deal';
+import { DealTypes, dealTypes } from '../../models/real-estate-deal';
 
 @Component({
   selector: 'ts-deal-type-badge',

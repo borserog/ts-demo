@@ -1,5 +1,8 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
+import {
+  dealTypes,
+  RealEstateDeal,
+} from '../../shared/models/real-estate-deal';
 import { JsonPipe, NgClass, NgPlural, NgPluralCase } from '@angular/common';
 import {
   FormArray,
@@ -29,7 +32,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 })
 export class AddDealFormComponent {
   @Output() requestCloseDialog = new EventEmitter();
-  @Output() requestSaveNewDeals = new EventEmitter<RealStateDeal[]>();
+  @Output() requestSaveNewDeals = new EventEmitter<RealEstateDeal[]>();
   fb = inject(FormBuilder);
   dealForm: DealForm = {
     name: ['', Validators.required],
@@ -59,7 +62,7 @@ export class AddDealFormComponent {
 
   saveNewDeals() {
     this.requestSaveNewDeals.emit(
-      this.form.controls.dealsForm.value as unknown as RealStateDeal[]
+      this.form.controls.dealsForm.value as unknown as RealEstateDeal[]
     );
   }
 

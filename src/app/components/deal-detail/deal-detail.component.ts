@@ -6,9 +6,9 @@ import {
   OnInit,
 } from '@angular/core';
 import { SectionCardComponent } from '../../shared/ui/content-card/section-card.component';
-import { RealStateDealService } from '../../shared/services/real-state-deal.service';
+import { RealEstateDealService } from '../../shared/services/real-estate-deal.service';
 import { Observable, startWith, Subject, switchMap } from 'rxjs';
-import { RealStateDeal } from '../../shared/models/real-state-deal';
+import { RealEstateDeal } from '../../shared/models/real-estate-deal';
 import {
   AsyncPipe,
   CurrencyPipe,
@@ -44,8 +44,8 @@ export class DealDetailComponent implements OnInit {
 
   readonly dialog = inject(Dialog);
 
-  deal$!: Observable<RealStateDeal>;
-  readonly realsStateDealService = inject(RealStateDealService);
+  deal$!: Observable<RealEstateDeal>;
+  readonly realsStateDealService = inject(RealEstateDealService);
   readonly loadDeal$ = new Subject<string>();
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class DealDetailComponent implements OnInit {
     );
   }
 
-  openDialog(data: RealStateDeal): void {
+  openDialog(data: RealEstateDeal): void {
     const dialogRef = this.dialog.open(DealFormDialogComponent, {
       minWidth: '80vw',
       data,

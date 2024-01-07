@@ -16,8 +16,8 @@ import {
 } from 'rxjs';
 import {
   DealFilters,
-  RealStateDealService,
-} from '../../shared/services/real-state-deal.service';
+  RealEstateDealService,
+} from '../../shared/services/real-estate-deal.service';
 import {
   AsyncPipe,
   CurrencyPipe,
@@ -27,7 +27,10 @@ import {
   NgTemplateOutlet,
   PercentPipe,
 } from '@angular/common';
-import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
+import {
+  dealTypes,
+  RealEstateDeal,
+} from '../../shared/models/real-estate-deal';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { DealFormDialogComponent } from '../deal-dialog/deal-form-dialog.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -62,17 +65,17 @@ export class DealsTableComponent implements OnInit {
   readonly dialog = inject(Dialog);
   readonly destroyRef = inject(DestroyRef);
   readonly fb = inject(FormBuilder);
-  readonly realStateDealsService = inject(RealStateDealService);
+  readonly realStateDealsService = inject(RealEstateDealService);
   readonly router = inject(Router);
 
   readonly Object = Object;
   readonly dealTypes = dealTypes;
 
   readonly loadDeals$ = new BehaviorSubject<DealFilters | null>(null);
-  readonly dealsList$: Observable<RealStateDeal[]> = this.loadDeals$.pipe(
+  readonly dealsList$: Observable<RealEstateDeal[]> = this.loadDeals$.pipe(
     startWith(null),
     switchMap((filters) =>
-      this.realStateDealsService.getRealStateDeals(filters)
+      this.realStateDealsService.getRealEstateDeals(filters)
     )
   );
 
@@ -96,7 +99,7 @@ export class DealsTableComponent implements OnInit {
       });
   }
 
-  openDialog(event: Event, data?: RealStateDeal): void {
+  openDialog(event: Event, data?: RealEstateDeal): void {
     event.stopPropagation();
     const dialogRef = this.dialog.open(DealFormDialogComponent, {
       minWidth: '80vw',
@@ -113,7 +116,7 @@ export class DealsTableComponent implements OnInit {
     });
   }
 
-  async navigateToDealDetails(deal: RealStateDeal) {
+  async navigateToDealDetails(deal: RealEstateDeal) {
     await this.router.navigate(['deal', deal.id]);
   }
 }

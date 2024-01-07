@@ -14,7 +14,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
+import {
+  dealTypes,
+  RealEstateDeal,
+} from '../../shared/models/real-estate-deal';
 import {
   DealForm,
   DealFormDialogComponent,
@@ -27,9 +30,9 @@ import {
   templateUrl: './edit-deal-form.component.html',
 })
 export class EditDealFormComponent implements OnInit {
-  @Input() realStateDeal!: RealStateDeal;
+  @Input() realStateDeal!: RealEstateDeal;
   @Output() requestCloseDialog = new EventEmitter();
-  @Output() requestEditDeal = new EventEmitter<RealStateDeal>();
+  @Output() requestEditDeal = new EventEmitter<RealEstateDeal>();
   fb = inject(FormBuilder);
   form!: FormGroup;
   protected readonly Object = Object;
@@ -64,6 +67,6 @@ export class EditDealFormComponent implements OnInit {
     this.requestEditDeal.emit({
       id: this.realStateDeal.id,
       ...this.form.value,
-    } as RealStateDeal);
+    } as RealEstateDeal);
   }
 }

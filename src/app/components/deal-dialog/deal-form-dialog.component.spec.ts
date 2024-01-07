@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DealFormDialogComponent } from './deal-form-dialog.component';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RealStateDealService } from '../../shared/services/real-state-deal.service';
-import { RealStateDeal } from '../../shared/models/real-state-deal';
+import { RealEstateDealService } from '../../shared/services/real-estate-deal.service';
+import { RealEstateDeal } from '../../shared/models/real-estate-deal';
 
 describe('DealFormDialogComponent', () => {
   let component: DealFormDialogComponent;
@@ -23,7 +23,7 @@ describe('DealFormDialogComponent', () => {
       imports: [DealFormDialogComponent],
       providers: [
         {
-          provide: RealStateDealService,
+          provide: RealEstateDealService,
           useValue: realStateDealServiceMock,
         },
         {
@@ -60,7 +60,7 @@ describe('DealFormDialogComponent', () => {
   });
 
   it('should save new deals and close dialog on saveNewDeals call', () => {
-    const newDeals: RealStateDeal[] = [
+    const newDeals: RealEstateDeal[] = [
       {
         name: 'Tech Park Innovation Hub',
         type: 'Development',
@@ -83,7 +83,7 @@ describe('DealFormDialogComponent', () => {
   });
 
   it('should edit deal and close dialog on editDeal call', () => {
-    const editedDeal: RealStateDeal = {
+    const editedDeal: RealEstateDeal = {
       name: 'Historic',
       type: 'Development',
       purchasePrice: 2500000,

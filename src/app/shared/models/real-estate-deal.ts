@@ -1,4 +1,4 @@
-export type RealStateDeal = {
+export type RealEstateDeal = {
   id?: string;
   name: string;
   type: DealTypes;
