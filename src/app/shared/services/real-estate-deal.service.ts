@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { DealTypes, RealEstateDeal } from '../models/real-estate-deal';
+import { RealEstateDeal } from '../models/real-estate-deal';
 
-export type DealFilters = Partial<{
+export type DealFilters = {
   name: string;
-  type: DealTypes;
-}>;
+  type: string;
+};
 
 @Injectable({
   providedIn: 'root',

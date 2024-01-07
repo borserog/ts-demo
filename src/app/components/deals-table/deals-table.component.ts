@@ -28,6 +28,7 @@ import {
   PercentPipe,
 } from '@angular/common';
 import {
+  DealTypes,
   dealTypes,
   RealEstateDeal,
 } from '../../shared/models/real-estate-deal';
@@ -87,14 +88,13 @@ export class DealsTableComponent implements OnInit {
   ngOnInit() {
     this.loadDeals$.next(null);
 
-    this.filtersForm.valueChanges
+    (this.filtersForm.valueChanges as Observable<DealFilters>)
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        debounceTime(500),
         distinctUntilChanged(),
-        tap(console.log)
+        debounceTime(500),
+        takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe((filters) => {
+      .subscribe((filters: DealFilters) => {
         this.loadDeals$.next(filters);
       });
   }
