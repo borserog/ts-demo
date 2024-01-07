@@ -12,7 +12,6 @@ import {
   Observable,
   startWith,
   switchMap,
-  tap,
 } from 'rxjs';
 import {
   DealFilters,
@@ -28,7 +27,6 @@ import {
   PercentPipe,
 } from '@angular/common';
 import {
-  DealTypes,
   dealTypes,
   RealEstateDeal,
 } from '../../shared/models/real-estate-deal';

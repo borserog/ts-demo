@@ -1,12 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DealDetailComponent } from './deal-detail.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RealEstateDeal } from '../../shared/models/real-estate-deal';
 import { Dialog } from '@angular/cdk/dialog';
 import { of } from 'rxjs';
-import spyOn = jest.spyOn;
 import { DealFormDialogComponent } from '../deal-dialog/deal-form-dialog.component';
 
 describe('DealDetailComponent', () => {

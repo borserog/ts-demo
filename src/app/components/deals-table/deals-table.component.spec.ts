@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DealsTableComponent } from './deals-table.component';
-import Spy = jasmine.Spy;
 import { RealEstateDeal } from '../../shared/models/real-estate-deal';
 
 describe('DealsListComponent', () => {

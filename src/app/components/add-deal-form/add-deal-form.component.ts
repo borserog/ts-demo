@@ -58,7 +58,7 @@ export class AddDealFormComponent {
     this.requestCloseDialog.emit();
   }
 
-  castFormGroup(dealForm: any): FormGroup {
+  castFormGroup(dealForm: unknown): FormGroup {
     return dealForm as FormGroup;
   }
 
