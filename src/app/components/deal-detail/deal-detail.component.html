@@ -1,10 +1,16 @@
 <ts-section-card>
-  <button [routerLink]="['/list']" class="btn btn-ghost btn-circle btn-md">
-    <ng-icon name="iconoirArrowLeft"></ng-icon>
-  </button>
+  @if (deal$ | async; as deal) {
+    <div class="flex flex-row justify-between">
+      <button [routerLink]="['/list']" class="btn btn-ghost btn-circle btn-md">
+        <ng-icon name="iconoirArrowLeft"></ng-icon>
+      </button>
+      <button (click)="openDialog(deal)" class="btn btn-outline btn-info btn-md">
+        <ng-icon name="iconoirEdit"></ng-icon>
+        Edit
+      </button>
+    </div>
 
-  <div class="p-4">
-    @if (deal$ | async; as deal) {
+    <div class="p-4">
       <div class="flex flex-row justify-start items-center gap-6 mb-2">
         <h1 class="text-4xl font-bold">{{ deal.name }}
         </h1>
@@ -46,8 +52,11 @@
           </div>
         </div>
       </div>
-    } @else {
-      <p>Error fetching deal</p>
-    }
-  </div>
+    </div>
+  } @else {
+    <button [routerLink]="['/list']" class="btn btn-ghost btn-circle btn-md">
+      <ng-icon name="iconoirArrowLeft"></ng-icon>
+    </button>
+    <p>Error fetching deal</p>
+  }
 </ts-section-card>
