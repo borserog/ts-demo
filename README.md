@@ -7,14 +7,14 @@ management of their real estate deals.
 
 ## Access
 
-Access the application remotely at [ts-demo](http://termsheet-challenge-client.s3-website.us-east-2.amazonaws.com/list).
+Access the application remotely at [ts-demo](https://ts-demo-two.vercel.app/list).
 
 ## Features
 
 ### Deal Listing
 
-- View a table of pre-filled deals (hard-coded, no API).
-- Filter the list by at least two fields of your choice.
+- View a table of pre-filled deals (right now those values are hard coded).
+- Filter the list by deal name and/or the deal type of your choice.
 
 ### Deal Management
 
@@ -24,17 +24,16 @@ Access the application remotely at [ts-demo](http://termsheet-challenge-client.s
 ### Navigation
 
 - Click on a deal to be redirected to a detailed deal page.
-- Return to the list page effortlessly.
+- It is also possible to edit deals from its detail page.
+- Return to the list page by clicking the back button.
 
 ## Bonus Features
 
 - Display all matching deals in the deals list.
-- Enjoy a beautiful UI designed for real estate professionals.
+- Enjoy a beautiful UI matching the brand colors.
 - Experience seamless navigation features for an intuitive user journey.
 
 ## Commands
-
-Execute the following commands from the `package.json`:
 
 - `npm start`: Start the application locally.
 - `npm build`: Build the application.
@@ -43,5 +42,3 @@ Execute the following commands from the `package.json`:
 ## Additional Information
 
 For any issues or inquiries, please refer to the [issue tracker](https://github.com/your-username/ts-demo/issues).
-
-Feel free to explore and enhance your real estate deal management with **ts-demo**!
