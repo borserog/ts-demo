@@ -7,7 +7,7 @@
     <input
       [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
       autocomplete="off"
-      class="input input-bordered input-primary w-full"
+      class="input   input-primary w-full"
       formControlName="name"
       minlength="1"
       name="name"
@@ -20,7 +20,7 @@
     <input
       [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
       autocomplete="off"
-      class="input input-bordered input-primary w-full"
+      class="input   input-primary w-full"
       formControlName="address"
       minlength="1"
       name="address"
@@ -33,7 +33,7 @@
     <input
       [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
       autocomplete="off"
-      class="input input-bordered input-primary w-full"
+      class="input   input-primary w-full"
       formControlName="purchasePrice"
       minlength="1"
       name="purchase-price"
@@ -46,7 +46,7 @@
     <input
       [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
       autocomplete="off"
-      class="input input-bordered input-primary w-full"
+      class="input   input-primary w-full"
       formControlName="netOperationalIncome"
       minlength="1"
       name="noi"
@@ -68,7 +68,7 @@
 <div class="flex flex-row place-content-end gap-2">
   <button (click)="editDeal()"
           [disabled]="form.invalid || form.pristine"
-          class="btn btn-primary"
+          class="btn btn-secondary"
   >
     Send
   </button>

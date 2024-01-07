@@ -26,7 +26,7 @@ module.exports = {
           success: '#00db69',
           warning: '#facc15',
           error: '#f43f5e',
-          '.btn-primary': {
+          '.btn-primary, .btn-secondary': {
             color: '#ffffff',
           },
         },

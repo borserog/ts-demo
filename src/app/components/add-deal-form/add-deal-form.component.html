@@ -67,7 +67,7 @@
             <input
               formControlName="name"
               autocomplete="off"
-              class="input input-bordered input-primary input-xs w-full"
+              class="input input-primary input-sm w-full"
               [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
               minlength="1"
               name="name"
@@ -80,7 +80,7 @@
             <input
               formControlName="address"
               autocomplete="off"
-              class="input input-bordered input-primary input-xs w-full"
+              class="input input-primary input-sm w-full"
               [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
               minlength="1"
               name="address"
@@ -93,7 +93,7 @@
             <input
               formControlName="purchasePrice"
               autocomplete="off"
-              class="input input-bordered input-primary input-xs w-full"
+              class="input input-primary input-sm w-full"
               [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
               minlength="1"
               name="purchase-price"
@@ -106,7 +106,7 @@
             <input
               formControlName="netOperationalIncome"
               autocomplete="off"
-              class="input input-bordered input-primary input-xs w-full"
+              class="input input-primary input-sm w-full"
               [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
               minlength="1"
               name="noi"
@@ -116,7 +116,7 @@
 
           <label class="form-control w-full">
             <p class="font-bold mb-1">Type</p>
-            <select formControlName="type" class="select select-bordered select-primary select-xs w-full max-w-xs">
+            <select formControlName="type" class="select select-primary select-sm w-full max-w-xs">
               <option [value]="''" disabled selected>Select Deal type</option>
               @for (entry of Object.values(dealTypes); track entry) {
                 <option [value]="entry">{{ entry }}</option>
@@ -143,7 +143,7 @@
 <div class="mt-2 flex flex-row place-content-end gap-2">
   <button (click)="saveNewDeals()"
           [disabled]="form.invalid"
-          class="btn btn-primary"
+          class="btn btn-secondary"
   >
     Save
   </button>
