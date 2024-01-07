@@ -1,9 +1,8 @@
-<section class="card shadow-2xl p-6 border-[1px] border-slate-300 w-full"
-         xmlns="http://www.w3.org/1999/html">
+<ts-section-card>
   <div>
-    <div class="flex place-content-between mb-4">
+    <div class="flex place-content-between mb-6">
       <div [formGroup]="filtersForm" class="flex flex-row justify-start items-center gap-2">
-        <span>Filters:</span>
+        <span><ng-icon class="text-primary" name="iconoirFilter"></ng-icon></span>
         <input class="input input-bordered input-primary input-md w-full max-w-xs"
                formControlName="name"
                placeholder="Deal Name" type="text" />
@@ -15,7 +14,7 @@
         </select>
         <button (click)="resetFilters()" class="btn btn-ghost btn-md">Clear</button>
       </div>
-      <button (click)="openDialog()" class="btn btn-primary btn-md">Add Deal</button>
+      <button (click)="openDialog($event)" class="btn btn-primary btn-md">Add Deal</button>
     </div>
   </div>
   @if (dealsList$ | async; as dealsList) {
@@ -32,11 +31,12 @@
             NOI
           </th>
           <th>Cap Rate</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
           @for (deal of dealsList; track deal.id; let count = $count) {
-            <tr class="hover:bg-slate-200 cursor-pointer" (click)="openDialog(deal)">
+            <tr class="hover:bg-slate-200 cursor-pointer" (click)="navigateToDealDetails(deal)">
               <th [id]="deal.id">{{ deal.id }}</th>
               <td class="truncate">{{ deal.name }}</td>
               <td>
@@ -47,6 +47,12 @@
               <td>{{ deal.purchasePrice | currency }}</td>
               <td>{{ deal.netOperationalIncome | currency }}</td>
               <td>{{ (deal.netOperationalIncome / deal.purchasePrice) | percent }}</td>
+              <td>
+                <button class="btn btn-ghost text-blue-500 btn-sm btn-rounded text-xs"
+                        (click)="openDialog($event, deal)">
+                  <ng-icon name="iconoirEdit"></ng-icon>
+                </button>
+              </td>
             </tr>
           }
         </tbody>
@@ -62,19 +68,19 @@
       <small>Loading...</small>
     </div>
   }
-</section>
+</ts-section-card>
 
 
 <ng-template #typeBadge let-type="type">
   <div class="[&>small]:text-xs text-bold">
     @switch (type) {
-      @case (dealType.acquisition) {
+      @case (dealTypes.acquisition) {
         <small class="badge badge-success text-green-900">{{ type }}</small>
       }
-      @case (dealType.lease) {
+      @case (dealTypes.lease) {
         <small class="badge badge-info text-blue-800">{{ type }}</small>
       }
-      @case (dealType.development) {
+      @case (dealTypes.development) {
         <small class="badge badge-warning text-yellow-900">{{ type }}</small>
       }
       @default {

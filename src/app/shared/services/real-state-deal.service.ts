@@ -59,6 +59,7 @@ export class RealStateDealService {
     });
 
     mockedDeals = [...dealsWithIds, ...mockedDeals];
+    mockedDeals.sort((a: any, b: any) => +a.id - +b.id);
   }
 
   editDeal(editedDeal: RealStateDeal) {
@@ -70,8 +71,8 @@ export class RealStateDealService {
       const newMockedDealsState = mockedDeals.filter(
         (deal) => editedDeal.id !== deal?.id
       );
-      debugger;
-      mockedDeals = [...newMockedDealsState, editedDeal];
+      mockedDeals = [editedDeal, ...newMockedDealsState];
+      mockedDeals.sort((a: any, b: any) => +a.id - +b.id);
     }
   }
 }

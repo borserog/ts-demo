@@ -1,16 +1,18 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 import {
   BehaviorSubject,
-  combineLatest,
-  count,
   debounceTime,
   distinctUntilChanged,
   Observable,
   startWith,
-  Subject,
   switchMap,
   tap,
-  withLatestFrom,
 } from 'rxjs';
 import {
   DealFilters,
@@ -28,9 +30,11 @@ import {
 import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { DealFormDialogComponent } from '../deal-dialog/deal-form-dialog.component';
-import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import { Router } from '@angular/router';
+import { NgIcon } from '@ng-icons/core';
+import { SectionCardComponent } from '../../shared/ui/content-card/section-card.component';
 
 @Component({
   selector: 'ts-deals-table',
@@ -45,24 +49,31 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     ReactiveFormsModule,
     NgPlural,
     NgPluralCase,
+    NgIcon,
+    SectionCardComponent,
   ],
+  providers: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './deals-table.component.html',
 })
 export class DealsTableComponent implements OnInit {
+  readonly dialog = inject(Dialog);
+  readonly destroyRef = inject(DestroyRef);
+  readonly fb = inject(FormBuilder);
+  readonly realStateDealsService = inject(RealStateDealService);
+  readonly router = inject(Router);
+
+  readonly Object = Object;
+  readonly dealTypes = dealTypes;
+
   readonly loadDeals$ = new BehaviorSubject<DealFilters | null>(null);
-  protected readonly dealType = dealTypes;
-  protected readonly Object = Object;
-  protected readonly dealTypes = dealTypes;
-  private readonly realStateDealsService = inject(RealStateDealService);
   readonly dealsList$: Observable<RealStateDeal[]> = this.loadDeals$.pipe(
     startWith(null),
     switchMap((filters) =>
       this.realStateDealsService.getRealStateDeals(filters)
     )
   );
-  private readonly dialog = inject(Dialog);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly fb = inject(FormBuilder);
+
   filtersForm = this.fb.group({
     name: '',
     type: '',
@@ -83,7 +94,8 @@ export class DealsTableComponent implements OnInit {
       });
   }
 
-  openDialog(data?: RealStateDeal): void {
+  openDialog(event: Event, data?: RealStateDeal): void {
+    event.stopPropagation();
     const dialogRef = this.dialog.open(DealFormDialogComponent, {
       minWidth: '80vw',
       data,
@@ -97,5 +109,9 @@ export class DealsTableComponent implements OnInit {
       name: '',
       type: '',
     });
+  }
+
+  async navigateToDealDetails(deal: RealStateDeal) {
+    await this.router.navigate(['deal', deal.id]);
   }
 }
