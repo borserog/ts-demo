@@ -1,6 +1,7 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import {
   BehaviorSubject,
+  combineLatest,
   count,
   debounceTime,
   distinctUntilChanged,
@@ -8,6 +9,7 @@ import {
   startWith,
   Subject,
   switchMap,
+  tap,
   withLatestFrom,
 } from 'rxjs';
 import {
@@ -26,7 +28,7 @@ import {
 import { dealTypes, RealStateDeal } from '../../shared/models/real-state-deal';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { DealFormDialogComponent } from '../deal-dialog/deal-form-dialog.component';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -47,37 +49,37 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   templateUrl: './deals-table.component.html',
 })
 export class DealsTableComponent implements OnInit {
-  realStateDealsService = inject(RealStateDealService);
-  dialog = inject(Dialog);
-  destroyRef = inject(DestroyRef);
-
-  loadDeals$ = new Subject<void>();
-  dealsFilters$ = new BehaviorSubject<DealFilters | null>(null);
-  dealsList$: Observable<RealStateDeal[]> = this.loadDeals$.pipe(
+  readonly loadDeals$ = new BehaviorSubject<DealFilters | null>(null);
+  protected readonly dealType = dealTypes;
+  protected readonly Object = Object;
+  protected readonly dealTypes = dealTypes;
+  private readonly realStateDealsService = inject(RealStateDealService);
+  readonly dealsList$: Observable<RealStateDeal[]> = this.loadDeals$.pipe(
     startWith(null),
-    withLatestFrom(this.dealsFilters$),
-    switchMap(([, filters]) =>
+    switchMap((filters) =>
       this.realStateDealsService.getRealStateDeals(filters)
     )
   );
-  dealNameForm = new FormControl();
-
-  protected readonly dealType = dealTypes;
-  protected readonly count = count;
+  private readonly dialog = inject(Dialog);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly fb = inject(FormBuilder);
+  filtersForm = this.fb.group({
+    name: '',
+    type: '',
+  });
 
   ngOnInit() {
-    this.loadDeals$.next();
+    this.loadDeals$.next(null);
 
-    this.dealNameForm.valueChanges
+    this.filtersForm.valueChanges
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
         takeUntilDestroyed(this.destroyRef),
-        withLatestFrom(this.dealsFilters$)
+        tap(console.log)
       )
-      .subscribe(([search, filters]) => {
-        this.dealsFilters$.next({ ...filters, name: search });
-        this.loadDeals$.next();
+      .subscribe((filters) => {
+        this.loadDeals$.next(filters);
       });
   }
 
@@ -87,6 +89,13 @@ export class DealsTableComponent implements OnInit {
       data,
     });
 
-    dialogRef.closed.subscribe(() => this.loadDeals$.next());
+    dialogRef.closed.subscribe(() => this.loadDeals$.next(null));
+  }
+
+  resetFilters() {
+    this.filtersForm.reset({
+      name: '',
+      type: '',
+    });
   }
 }

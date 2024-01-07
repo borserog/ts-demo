@@ -2,23 +2,29 @@
          xmlns="http://www.w3.org/1999/html">
   <div>
     <div class="flex place-content-between mb-4">
-      <div class="flex flex-row justify-start items-center gap-2">
+      <div [formGroup]="filtersForm" class="flex flex-row justify-start items-center gap-2">
         <span>Filters:</span>
-        <input [formControl]="dealNameForm"
-               class="input input-bordered input-primary input-sm w-full max-w-xs"
+        <input class="input input-bordered input-primary input-md w-full max-w-xs"
+               formControlName="name"
                placeholder="Deal Name" type="text" />
+        <select class="select select-bordered select-primary select-md w-full max-w-xs" formControlName="type">
+          <option [value]="''" selected>Select Deal type</option>
+          @for (entry of Object.values(dealTypes); track entry) {
+            <option [value]="entry">{{ entry }}</option>
+          }
+        </select>
+        <button (click)="resetFilters()" class="btn btn-ghost btn-md">Clear</button>
       </div>
-      <button (click)="openDialog()" class="btn btn-primary btn-sm">Add Deal</button>
+      <button (click)="openDialog()" class="btn btn-primary btn-md">Add Deal</button>
     </div>
   </div>
   @if (dealsList$ | async; as dealsList) {
-
-    <div class="overflow-x-auto">
-      <table aria-describedby="Deals Listing" class="table table-sm">
+    <div class="overflow-x-auto md:max-h-[60vh]">
+      <table aria-describedby="Deals Listing" class="table table-md">
         <!-- head -->
-        <thead>
+        <thead class="sticky top-0 bg-slate-100">
         <tr>
-          <th></th>
+          <th>#</th>
           <th>Deal Name</th>
           <th>Type</th>
           <th>Purchase Price</th>
@@ -45,12 +51,12 @@
           }
         </tbody>
       </table>
-      <small [ngPlural]="dealsList.length" class="text-center text-slate-400 w-full block mt-4">
-        <ng-template ngPluralCase="=1">Displaying {{ dealsList.length }} match</ng-template>
-        <ng-template ngPluralCase="other">Displaying {{ dealsList.length }} matches</ng-template>
-        <ng-template ngPluralCase="0">No matches. Please try a different search criteria.</ng-template>
-      </small>
     </div>
+    <small [ngPlural]="dealsList.length" class="text-center text-slate-400 w-full block mt-4">
+      <ng-template ngPluralCase="=1">Displaying {{ dealsList.length }} match</ng-template>
+      <ng-template ngPluralCase="other">Displaying {{ dealsList.length }} matches</ng-template>
+      <ng-template ngPluralCase="0">No matches. Please try a different search criteria.</ng-template>
+    </small>
   } @else {
     <div class="text-center flex flex-col place-content-center">
       <small>Loading...</small>
@@ -63,13 +69,13 @@
   <div class="[&>small]:text-xs text-bold">
     @switch (type) {
       @case (dealType.acquisition) {
-        <small class="badge badge-success">{{ type }}</small>
+        <small class="badge badge-success text-green-900">{{ type }}</small>
       }
       @case (dealType.lease) {
-        <small class="badge badge-info">{{ type }}</small>
+        <small class="badge badge-info text-blue-800">{{ type }}</small>
       }
       @case (dealType.development) {
-        <small class="badge badge-warning">{{ type }}</small>
+        <small class="badge badge-warning text-yellow-900">{{ type }}</small>
       }
       @default {
         <small class="badge badge-ghost">{{ type }}</small>

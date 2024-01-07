@@ -16,7 +16,7 @@ export class RealStateDealService {
   constructor() {}
 
   *mockedIdGenerator() {
-    let initialId = 8;
+    let initialId = 22;
 
     while (true) {
       yield initialId++;
@@ -32,6 +32,14 @@ export class RealStateDealService {
           deal.name
             .toLowerCase()
             .includes(filters.name?.toLowerCase() as string)
+        );
+      }
+
+      if (filters.type) {
+        filteredResults = filteredResults.filter((deal) =>
+          deal.type
+            .toLowerCase()
+            .includes(filters.type?.toLowerCase() as string)
         );
       }
       return of(filteredResults);

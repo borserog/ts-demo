@@ -13,7 +13,7 @@
                           [attr.aria-expanded]="accordionItem.expanded"
                           [attr.aria-controls]="'accordion-body-' + index"
                           [formGroup]="castFormGroup(dealForm)">
-        <div class="shadow-sm border-slate-300"
+        <div class="pr-2"
         >
           <div class="p-4 border-b-[1px]"
                [ngClass]="{
@@ -106,14 +106,14 @@
 
 <!-- if there is a button in form, it will close the modal -->
 <!--      if it is an adding operation -->
-<div class="flex place-content-center m-8 gap-2">
+<div class="flex place-content-center m-4 gap-2">
   <button (click)="addNewDealForm()" [disabled]="dealsForm.length >= 5" class="btn btn-outline btn-sm">Add
   </button>
   <button (click)="accordion.openAll()" class="btn btn-outline btn-sm">
-    Open All
+    Expand All
   </button>
   <button (click)="accordion.closeAll()" class="btn btn-outline btn-sm">
-    Close All
+    Collapse All
   </button>
 </div>
 
