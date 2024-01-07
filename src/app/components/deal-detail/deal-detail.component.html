@@ -1,4 +1,6 @@
 <ts-section-card>
-  <p>deal-detail works!</p>
-  
+  <button [routerLink]="['/list']" class="btn btn-ghost btn-circle btn-md">
+    <ng-icon name="iconoirArrowLeft"></ng-icon>
+  </button>
+  <pre>{{ deal$ | async | json }}</pre>
 </ts-section-card>

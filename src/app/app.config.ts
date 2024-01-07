@@ -6,7 +6,11 @@ import {
 } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideIcons, provideNgIconsConfig } from '@ng-icons/core';
-import { iconoirEdit, iconoirFilter } from '@ng-icons/iconoir';
+import {
+  iconoirArrowLeft,
+  iconoirEdit,
+  iconoirFilter,
+} from '@ng-icons/iconoir';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +20,6 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding()
     ),
     provideNgIconsConfig({ size: '1.25rem' }),
-    provideIcons({ iconoirFilter, iconoirEdit }),
+    provideIcons({ iconoirFilter, iconoirEdit, iconoirArrowLeft }),
   ],
 };

@@ -75,6 +75,12 @@ export class RealStateDealService {
       mockedDeals.sort((a: any, b: any) => +a.id - +b.id);
     }
   }
+
+  getDealById(id: string): Observable<RealStateDeal> {
+    const deal = mockedDeals.find(({ id: dealId }) => dealId === id);
+
+    return of(deal as RealStateDeal);
+  }
 }
 
 let mockedDeals: RealStateDeal[] = [
