@@ -2,5 +2,18 @@
   <button [routerLink]="['/list']" class="btn btn-ghost btn-circle btn-md">
     <ng-icon name="iconoirArrowLeft"></ng-icon>
   </button>
+
+  <div class="p-4">
+    @if (deal$ | async; as deal) {
+      <h1 class="text-4xl font-bold mb-2">{{ deal.name }}</h1>
+      <h2 class="text-slate-500 flex flex-row justify-start items-center gap-2">
+        <ng-icon name="iconoirMap"></ng-icon>
+        {{ deal.address }}
+      </h2>
+    } @else {
+      <p>Error fetching deal</p>
+    }
+  </div>
+
   <pre>{{ deal$ | async | json }}</pre>
 </ts-section-card>
