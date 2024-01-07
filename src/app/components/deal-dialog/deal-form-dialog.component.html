@@ -1,12 +1,10 @@
 <div cdkOverlayOrigin class="modal-box max-w-[800px] w-full m-auto">
-  <div class="m-4">
-    @if (data) {
-      <ts-edit-deal-form [realStateDeal]="data" (requestCloseDialog)="closeDialog()"
-                         (requestEditDeal)="editDeal($event)"></ts-edit-deal-form>
+  @if (data) {
+    <ts-edit-deal-form [realStateDeal]="data" (requestCloseDialog)="closeDialog()"
+                       (requestEditDeal)="editDeal($event)"></ts-edit-deal-form>
 
-    } @else {
-      <ts-add-deal-dialog (requestCloseDialog)="closeDialog()"
-                          (requestSaveNewDeals)="saveNewDeals($event)"></ts-add-deal-dialog>
-    }
-  </div>
+  } @else {
+    <ts-add-deal-dialog (requestCloseDialog)="closeDialog()"
+                        (requestSaveNewDeals)="saveNewDeals($event)"></ts-add-deal-dialog>
+  }
 </div>

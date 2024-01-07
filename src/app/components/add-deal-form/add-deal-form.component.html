@@ -13,119 +13,116 @@
                           [attr.aria-expanded]="accordionItem.expanded"
                           [attr.aria-controls]="'accordion-body-' + index"
                           [formGroup]="castFormGroup(dealForm)">
-        <div class="pr-2"
-        >
-          <div class="p-4 border-b-[1px]"
-               [ngClass]="{
+        <div class="p-4 border-b-[1px]"
+             [ngClass]="{
                 'bg-error text-red-100': dealForm.invalid,
                 'bg-success text-green-100': dealForm.valid,
                 'rounded-t-2xl': first,
                 'rounded-b-2xl': last && !accordionItem.expanded,
                 'border-b-[1px]': !last
                }"
-               (click)="accordionItem.toggle()">
-            <div class="flex flex-row flex-nowrap justify-between items-center">
-              @if (dealForm.invalid) {
-                <span class="flex flex-row justify-start items-center gap-2">
+             (click)="accordionItem.toggle()">
+          <div class="flex flex-row flex-nowrap justify-between items-center">
+            @if (dealForm.invalid) {
+              <span class="flex flex-row justify-start items-center gap-2">
                   <ng-icon strokeWidth="2px" size="1.75rem" name="iconoirWarningTriangle"></ng-icon>
                   <span class="font-bold">{{ index + 1 }} of {{ count }}: </span>
                   <span>Please fill out all fields</span>
                 </span>
-              } @else {
-                <span class="flex flex-row justify-start items-center gap-2">
+            } @else {
+              <span class="flex flex-row justify-start items-center gap-2">
                   <ng-icon strokeWidth="2px" size="1.75rem" name="iconoirCheckCircle"></ng-icon>
                   <span class="font-bold">{{ index + 1 }} of {{ count }}: </span>
                   <span>Good to go!</span>
                 </span>
+            }
+            <div class="flex flex-row justify-end items-center gap-6">
+              @if (count !== 1) {
+                <button
+                  class="btn text-base-100 btn-ghost btn-outline btn-sm hover:bg-transparent/20 hover:border-transparent"
+                  (click)="removeForm(index)">
+                  Remove
+                </button>
               }
-              <div class="flex flex-row justify-end items-center gap-6">
-                @if (count !== 1) {
-                  <button
-                    class="btn text-base-100 btn-ghost btn-outline btn-sm hover:bg-transparent/20 hover:border-transparent"
-                    (click)="removeForm(index)">
-                    Remove
-                  </button>
-                }
-                <!--- Caret -->
-                @if (accordionItem.expanded) {
-                  <ng-icon strokeWidth="2px" name="iconoirNavArrowUp"></ng-icon>
-                } @else {
-                  <ng-icon strokeWidth="2px" name="iconoirNavArrowDown"></ng-icon>
-                }
-              </div>
+              <!--- Caret -->
+              @if (accordionItem.expanded) {
+                <ng-icon strokeWidth="2px" name="iconoirNavArrowUp"></ng-icon>
+              } @else {
+                <ng-icon strokeWidth="2px" name="iconoirNavArrowDown"></ng-icon>
+              }
             </div>
-
-
           </div>
-          <div role="region" class="grid grid-cols-2 gap-4 bg-slate-100 text-sm p-4"
-               [ngClass]="{
+
+
+        </div>
+        <div role="region" class="grid grid-cols-2 gap-4 bg-slate-50 text-sm p-4"
+             [ngClass]="{
                 'rounded-b-2xl': last && accordionItem.expanded,
                }"
-               [style.display]="accordionItem.expanded ? '' : 'none'"
-               [attr.id]="'accordion-body-' + index"
-               [attr.aria-labelledby]="'accordion-header-' + index">
-            <label class="form-control w-full">
-              <p class="font-bold mb-1">Deal Name</p>
-              <input
-                formControlName="name"
-                autocomplete="off"
-                class="input input-bordered input-xs w-full"
-                [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
-                minlength="1"
-                name="name"
-                placeholder="Type here"
-                type="text" />
-            </label>
+             [style.display]="accordionItem.expanded ? '' : 'none'"
+             [attr.id]="'accordion-body-' + index"
+             [attr.aria-labelledby]="'accordion-header-' + index">
+          <label class="form-control w-full">
+            <p class="font-bold mb-1">Deal Name</p>
+            <input
+              formControlName="name"
+              autocomplete="off"
+              class="input input-bordered input-primary input-xs w-full"
+              [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
+              minlength="1"
+              name="name"
+              placeholder="Type here"
+              type="text" />
+          </label>
 
-            <label class="form-control w-full">
-              <p class="font-bold mb-1">Address</p>
-              <input
-                formControlName="address"
-                autocomplete="off"
-                class="input input-bordered input-xs w-full"
-                [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
-                minlength="1"
-                name="address"
-                placeholder="Type here"
-                type="text" />
-            </label>
+          <label class="form-control w-full">
+            <p class="font-bold mb-1">Address</p>
+            <input
+              formControlName="address"
+              autocomplete="off"
+              class="input input-bordered input-primary input-xs w-full"
+              [maxlength]="DealFormDialog.DEFAULT_FIELD_MAX_LENGTH"
+              minlength="1"
+              name="address"
+              placeholder="Type here"
+              type="text" />
+          </label>
 
-            <label class="form-control w-full">
-              <p class="font-bold mb-1">Purchase Price</p>
-              <input
-                formControlName="purchasePrice"
-                autocomplete="off"
-                class="input input-bordered input-xs w-full"
-                [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
-                minlength="1"
-                name="purchase-price"
-                placeholder="Type here"
-                type="number" />
-            </label>
+          <label class="form-control w-full">
+            <p class="font-bold mb-1">Purchase Price</p>
+            <input
+              formControlName="purchasePrice"
+              autocomplete="off"
+              class="input input-bordered input-primary input-xs w-full"
+              [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
+              minlength="1"
+              name="purchase-price"
+              placeholder="Type here"
+              type="number" />
+          </label>
 
-            <label class="form-control w-full">
-              <p class="font-bold mb-1">NOI</p>
-              <input
-                formControlName="netOperationalIncome"
-                autocomplete="off"
-                class="input input-bordered input-xs w-full"
-                [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
-                minlength="1"
-                name="noi"
-                placeholder="Type here"
-                type="number" />
-            </label>
+          <label class="form-control w-full">
+            <p class="font-bold mb-1">NOI</p>
+            <input
+              formControlName="netOperationalIncome"
+              autocomplete="off"
+              class="input input-bordered input-primary input-xs w-full"
+              [maxlength]="DealFormDialog.DEFAULT_MONEY_FIELD_MAX_LENGTH"
+              minlength="1"
+              name="noi"
+              placeholder="Type here"
+              type="number" />
+          </label>
 
-            <label class="form-control w-full">
-              <p class="font-bold mb-1">Type</p>
-              <select formControlName="type" class="select select-bordered select-xs w-full max-w-xs">
-                <option [value]="''" disabled selected>Select Deal type</option>
-                @for (entry of Object.values(dealTypes); track entry) {
-                  <option [value]="entry">{{ entry }}</option>
-                }
-              </select>
-            </label>
-          </div>
+          <label class="form-control w-full">
+            <p class="font-bold mb-1">Type</p>
+            <select formControlName="type" class="select select-bordered select-primary select-xs w-full max-w-xs">
+              <option [value]="''" disabled selected>Select Deal type</option>
+              @for (entry of Object.values(dealTypes); track entry) {
+                <option [value]="entry">{{ entry }}</option>
+              }
+            </select>
+          </label>
         </div>
       </cdk-accordion-item>
     }
