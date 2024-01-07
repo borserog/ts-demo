@@ -14,7 +14,6 @@ import {
   iconoirHomeSale,
   iconoirMap,
   iconoirMoneySquare,
-  iconoirPin,
 } from '@ng-icons/iconoir';
 
 export const appConfig: ApplicationConfig = {

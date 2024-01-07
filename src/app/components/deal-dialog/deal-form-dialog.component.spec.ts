@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DealFormDialogComponent } from './deal-form-dialog.component';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RealStateDealService } from '../../shared/services/real-state-deal.service';
 import { RealStateDeal } from '../../shared/models/real-state-deal';
 

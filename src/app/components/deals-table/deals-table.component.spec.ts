@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DealsTableComponent } from './deals-table.component';
-import { provideIcons } from '@ng-icons/core';
 
 describe('DealsListComponent', () => {
   let component: DealsTableComponent;
