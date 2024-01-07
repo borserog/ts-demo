@@ -58,8 +58,8 @@ import { DealTypeBadgeComponent } from '../../shared/ui/deal-type-badge/deal-typ
     DealTypeBadgeComponent,
   ],
   providers: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './deals-table.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DealsTableComponent implements OnInit {
   readonly dialog = inject(Dialog);

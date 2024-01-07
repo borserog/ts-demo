@@ -16,6 +16,7 @@ import {
   DealFormDialogComponent,
 } from '../deal-dialog/deal-form-dialog.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'ts-add-deal-dialog',
@@ -27,6 +28,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     NgClass,
     NgPluralCase,
     JsonPipe,
+    NgIcon,
   ],
   templateUrl: './add-deal-form.component.html',
 })
@@ -61,6 +63,8 @@ export class AddDealFormComponent {
   }
 
   saveNewDeals() {
+    if (this.dealsForm.length > 5) return;
+
     this.requestSaveNewDeals.emit(
       this.form.controls.dealsForm.value as unknown as RealEstateDeal[]
     );
@@ -68,5 +72,9 @@ export class AddDealFormComponent {
 
   addNewDealForm() {
     this.dealsForm.push(this.fb.group({ ...this.dealForm }));
+  }
+
+  removeForm(index: number) {
+    this.dealsForm.removeAt(index);
   }
 }

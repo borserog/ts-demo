@@ -8,12 +8,18 @@ import { appRoutes } from './app.routes';
 import { provideIcons, provideNgIconsConfig } from '@ng-icons/core';
 import {
   iconoirArrowLeft,
+  iconoirBinMinus,
+  iconoirCheckCircle,
   iconoirEdit,
   iconoirFilter,
   iconoirGraphUp,
   iconoirHomeSale,
   iconoirMap,
   iconoirMoneySquare,
+  iconoirNavArrowDown,
+  iconoirNavArrowUp,
+  iconoirPlus,
+  iconoirWarningTriangle,
 } from '@ng-icons/iconoir';
 
 export const appConfig: ApplicationConfig = {
@@ -32,6 +38,12 @@ export const appConfig: ApplicationConfig = {
       iconoirHomeSale,
       iconoirMoneySquare,
       iconoirGraphUp,
+      iconoirWarningTriangle,
+      iconoirCheckCircle,
+      iconoirNavArrowUp,
+      iconoirNavArrowDown,
+      iconoirBinMinus,
+      iconoirPlus,
     }),
   ],
 };

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { RealEstateDealService } from '../../shared/services/real-estate-deal.service';
@@ -16,6 +16,7 @@ export type DealForm = {
   standalone: true,
   imports: [CdkOverlayOrigin, AddDealFormComponent, EditDealFormComponent],
   templateUrl: './deal-form-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DealFormDialogComponent {
   static readonly DEFAULT_FIELD_MAX_LENGTH = 50;

@@ -2,8 +2,8 @@
   <ng-template ngPluralCase="=1"> Add New Deal</ng-template>
   <ng-template ngPluralCase="other"> Add {{ dealsForm.controls.length }} New Deals</ng-template>
 </h2>
-<form [formGroup]="form" class="max-h-[40vh] overflow-auto flex flex-col gap-2 mb-2">
-  <cdk-accordion #accordion="cdkAccordion" formArrayName="dealsForm" multi="true">
+<form [formGroup]="form" class="overflow-auto flex flex-col gap-2 mb-2">
+  <cdk-accordion #accordion="cdkAccordion" formArrayName="dealsForm">
     @for (dealForm of dealsForm.controls; track dealForm; let index = $index; let first = $first; let last = $last; let count = $count) {
       <cdk-accordion-item role="button"
                           expanded="true"
@@ -24,8 +24,38 @@
                 'border-b-[1px]': !last
                }"
                (click)="accordionItem.toggle()">
-            <span class="font-bold">{{ index + 1 }} of {{ count }}
-              :</span> {{ dealForm.invalid ? 'Fill all fields' : 'Good to go' }}
+            <div class="flex flex-row flex-nowrap justify-between items-center">
+              @if (dealForm.invalid) {
+                <span class="flex flex-row justify-start items-center gap-2">
+                  <ng-icon strokeWidth="2px" size="1.75rem" name="iconoirWarningTriangle"></ng-icon>
+                  <span class="font-bold">{{ index + 1 }} of {{ count }}: </span>
+                  <span>Please fill out all fields</span>
+                </span>
+              } @else {
+                <span class="flex flex-row justify-start items-center gap-2">
+                  <ng-icon strokeWidth="2px" size="1.75rem" name="iconoirCheckCircle"></ng-icon>
+                  <span class="font-bold">{{ index + 1 }} of {{ count }}: </span>
+                  <span>Good to go!</span>
+                </span>
+              }
+              <div class="flex flex-row justify-end items-center gap-6">
+                @if (count !== 1) {
+                  <button
+                    class="btn text-base-100 btn-ghost btn-outline btn-sm hover:bg-transparent/20 hover:border-transparent"
+                    (click)="removeForm(index)">
+                    Remove
+                  </button>
+                }
+                <!--- Caret -->
+                @if (accordionItem.expanded) {
+                  <ng-icon strokeWidth="2px" name="iconoirNavArrowUp"></ng-icon>
+                } @else {
+                  <ng-icon strokeWidth="2px" name="iconoirNavArrowDown"></ng-icon>
+                }
+              </div>
+            </div>
+
+
           </div>
           <div role="region" class="grid grid-cols-2 gap-4 bg-slate-100 text-sm p-4"
                [ngClass]="{
@@ -102,27 +132,23 @@
 
   </cdk-accordion>
 </form>
-<p class="text-end">{{ dealsForm.length }}/5</p>
 
-<!-- if there is a button in form, it will close the modal -->
-<!--      if it is an adding operation -->
-<div class="flex place-content-center m-4 gap-2">
-  <button (click)="addNewDealForm()" [disabled]="dealsForm.length >= 5" class="btn btn-outline btn-sm">Add
-  </button>
-  <button (click)="accordion.openAll()" class="btn btn-outline btn-sm">
-    Expand All
-  </button>
-  <button (click)="accordion.closeAll()" class="btn btn-outline btn-sm">
-    Collapse All
+<div class="flex place-content-center mt-4 gap-2">
+  <button (click)="addNewDealForm()" [disabled]="dealsForm.length >= 5"
+          class="btn btn-circle btn-outline btn-primary btn-sm">
+    <ng-icon name="iconoirPlus"></ng-icon>
   </button>
 </div>
 
-<div class="flex flex-row place-content-end gap-2">
+<small
+  class="mt-2 block text-center text-slate-400 w-full">{{ dealsForm.length === 5 ? 'Limit of 5 deals per submission reached.' : '&nbsp;' }}</small>
+
+<div class="mt-2 flex flex-row place-content-end gap-2">
   <button (click)="saveNewDeals()"
           [disabled]="form.invalid"
           class="btn btn-primary"
   >
-    Send
+    Save
   </button>
   <button (click)="closeDialog()" class="btn btn-ghost">Close</button>
 </div>
