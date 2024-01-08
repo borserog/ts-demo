@@ -61,7 +61,6 @@ export class RealEstateDealService {
     });
 
     mockedDeals = [...dealsWithIds, ...mockedDeals];
-    mockedDeals.sort((a: any, b: any) => +a.id - +b.id);
   }
 
   editDeal(editedDeal: RealEstateDeal) {

@@ -16,4 +16,8 @@ export const appRoutes: Route[] = [
     path: 'deal/:id',
     component: DealDetailComponent,
   },
+  {
+    path: '**',
+    redirectTo: 'list',
+  },
 ];
