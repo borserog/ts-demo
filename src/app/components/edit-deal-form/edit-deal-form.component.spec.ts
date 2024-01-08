@@ -63,4 +63,14 @@ describe('EditDealFormComponent', () => {
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  it("shouldn't request deal to be edited if form is invalid", () => {
+    const spy = jest.spyOn(component.requestEditDeal, 'emit');
+
+    component.form.get('type')?.setValue('', { emitEvent: false });
+
+    component.editDeal();
+
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
 });

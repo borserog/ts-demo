@@ -39,9 +39,39 @@ describe('AddDealFormComponent', () => {
   it('should emit the correct events when saveNewDeals is called within the allowed limit of deal forms.', () => {
     const emitSpy = jest.spyOn(component.requestSaveNewDeals, 'emit');
 
+    component.dealsForm.at(0).setValue(
+      {
+        name: 'Tech Valley Data Center',
+        type: 'Acquisition',
+        purchasePrice: 4800000,
+        address: '123 Data Street, Tech Valley',
+        netOperationalIncome: 320000,
+      },
+      { emitEvent: false }
+    );
+
     component.saveNewDeals();
 
     expect(emitSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it("shouldn't emit the events when form is invalid", () => {
+    const emitSpy = jest.spyOn(component.requestSaveNewDeals, 'emit');
+
+    component.dealsForm.at(0).setValue(
+      {
+        name: 'Tech Valley Data Center',
+        type: '',
+        purchasePrice: 4800000,
+        address: '123 Data Street, Tech Valley',
+        netOperationalIncome: 320000,
+      },
+      { emitEvent: false }
+    );
+
+    component.saveNewDeals();
+
+    expect(emitSpy).toHaveBeenCalledTimes(0);
   });
 
   it('should not emit events when saveNewDeals is called with the number of deal forms exceeding the allowed limit.', () => {

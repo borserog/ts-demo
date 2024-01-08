@@ -63,7 +63,7 @@ export class AddDealFormComponent {
   }
 
   saveNewDeals() {
-    if (this.dealsForm.length > 5) return;
+    if (this.dealsForm.length > 5 || this.dealsForm.invalid) return;
 
     this.requestSaveNewDeals.emit(
       this.form.controls.dealsForm.value as unknown as RealEstateDeal[]

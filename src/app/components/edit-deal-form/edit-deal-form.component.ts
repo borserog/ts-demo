@@ -64,6 +64,8 @@ export class EditDealFormComponent implements OnInit {
   }
 
   editDeal() {
+    if (this.form.invalid) return;
+
     this.requestEditDeal.emit({
       id: this.realStateDeal.id,
       ...this.form.value,
